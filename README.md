@@ -2,7 +2,7 @@
 
 基于VUE的表格渲染和分页插件
 
-# 使用方式
+# 编译方式
 
 npm install
 npm run build
@@ -15,6 +15,7 @@ npm run build
 # ivtable
 
 ### 调用方式
+    <script src="dist/ivtable.js"></script>
 
      <ivtable
          :item_actions="table_item_actions"
