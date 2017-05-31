@@ -1,6 +1,6 @@
 /**
  * ivtable v1.0.0
- * github 没得 
+ * https://github.com/baoniu/ivtable 
  * Released under the MIT License.
  */
 

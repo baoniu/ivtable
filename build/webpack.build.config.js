@@ -1,6 +1,6 @@
 var webpack = require("webpack");
 var version = require("./../package.json").version;
-var banner = "/**\n" + " * ivtable v" + version + "\n" + " * github 没得 \n" + " * Released under the MIT License.\n" + " */\n";
+var banner = "/**\n" + " * ivtable v" + version + "\n" + " * https://github.com/baoniu/ivtable \n" + " * Released under the MIT License.\n" + " */\n";
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var StatsPlugin = require("stats-webpack-plugin");
 
