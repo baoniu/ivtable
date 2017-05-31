@@ -3,6 +3,7 @@
 基于VUE的表格渲染和分页插件
 
 # 使用方式
+
 npm install
 npm run build
 
@@ -11,8 +12,10 @@ npm run build
 
 
 
-#ivtable
+# ivtable
+
 ### 调用方式
+
      <ivtable
          :item_actions="table_item_actions"
          :table_data="table_data.rows"
@@ -23,6 +26,7 @@ npm run build
 
 
 ### 数据格式
+
     table_hint_text: '数据加载中... | 暂无数据'  //此数据属性有数据时，不显示数据表的数据
     table_columns 数据结构如下
     tableColumns: [
@@ -67,7 +71,8 @@ npm run build
       ]
 
 
-#ivpaaination
+
+# ivpaaination
 
 ### 调用方式
          <ivpagination
@@ -78,7 +83,9 @@ npm run build
         
         
 # 示例
+
 ### HTML
+
     <section class="panel">
         <div class="panel-body">
          <div class="adv-table editable-table">
@@ -101,6 +108,7 @@ npm run build
     </section>
     
 #### JS
+
     //渲染的表格头
     var table_columns = [
         {
