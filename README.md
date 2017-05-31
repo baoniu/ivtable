@@ -17,13 +17,13 @@ npm run build
 ### 调用方式
     <script src="dist/ivtable.js"></script>
 
-     <ivtable
+     <IVTable
          :item_actions="table_item_actions"
          :table_data="table_data.rows"
          :table_columns="table_columns"
          :table_hint_text="table_hint_text"
          table_css="table table-striped table-advance table-hover"
-     ></ivtable>
+     ></IVTable>
 
 
 ### 数据格式
@@ -76,10 +76,10 @@ npm run build
 # ivpaaination
 
 ### 调用方式
-         <ivpagination
+         <IVPagination
              :page_data="table_data"
              :pagination_button_length="4"
-         ></ivpagination>
+         ></IVPagination>
         
         
         
@@ -273,8 +273,8 @@ npm run build
         },
         allotStatusOptions: [],
         components:{
-            's-table': ivtable,
-            's-pagination': ivpagination,
+            's-table': IVTable,
+            's-pagination': IVPagination,
         },
         watch: {
             /**

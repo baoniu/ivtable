@@ -1,22 +1,22 @@
-import ivtable from './components/IVTable.vue'
-import ivpagination from './components/IVPagination.vue'
-import ivselect from './components/IVSelect.vue'
-import ivradio from './components/IVRadio.vue'
-import ivdateinput from './components/IVDateinput.vue'
+import IVTable from './components/IVTable.vue'
+import IVPagination from './components/IVPagination.vue'
+import IVSelect from './components/IVSelect.vue'
+import IVRadio from './components/IVRadio.vue'
+import IVDateinput from './components/IVDateinput.vue'
 
 function install(Vue){
-    Vue.component("ivtable", ivtable);
-    Vue.component("ivpagination", ivpagination);
-    Vue.component("ivselect", ivselect);
-    Vue.component("ivradio", ivradio);
-    Vue.component("ivdateinput", ivdateinput);
+    Vue.component("IVTable", IVTable);
+    Vue.component("IVPagination", IVPagination);
+    Vue.component("IVSelect", IVSelect);
+    Vue.component("IVRadio", IVRadio);
+    Vue.component("IVDateinput", IVDateinput);
 }
 export {
-    ivtable,
-    ivpagination,
-    ivselect,
-    ivradio,
-    ivdateinput,
+    IVTable,
+    IVPagination,
+    IVSelect,
+    IVRadio,
+    IVDateinput,
     install
 };
 
