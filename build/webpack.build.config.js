@@ -5,16 +5,43 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var StatsPlugin = require("stats-webpack-plugin");
 
 var loaders = [
+	//{
+	//	"test": /\.js?$/,
+	//	"exclude": /node_modules/,
+	//	"loader": "babel"
+	//},
+	//{
+	//	"test": /\.vue?$/,
+	//	"loader": "vue"
+	//}
+    {
+        test: /\.vue$/,
+        loader: 'vue'
+    },
 	{
-		"test": /\.js?$/,
-		"exclude": /node_modules/,
-		"loader": "babel"
-	},
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+    },
 	{
-		"test": /\.vue?$/,
-		"loader": "vue"
-	}
+        test: /\.css$/,
+        loader: 'style!css!autoprefixer'
+    },
+	{
+        test: /\.less$/,
+        loader: 'style!css!less'
+    },
+	{
+        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+        loader: 'url?limit=8192'
+    },
+	{
+        test: /\.(html|tpl)$/,
+        loader: 'vue-html'
+    }
 ];
+
+
 var cssFileName = "ivtable.css";
 
 module.exports = [
@@ -23,10 +50,17 @@ module.exports = [
 		output: {
 			path: "./dist",
 			filename: "ivtable.js",
-			library: "ivtable",
+			//library: "IVTable",	//不注释的话，都是这个名字咯,就有问题
 			libraryTarget: "umd"
 		},
-
+        externals: {
+            vue: {
+                root: 'Vue',
+                commonjs: 'vue',
+                commonjs2: 'vue',
+                amd: 'vue'
+            }
+        },
 		plugins: [
 			new webpack.DefinePlugin({
 				"process.env" : {
@@ -62,7 +96,8 @@ module.exports = [
 		},
 
 		resolve: {
-			packageAlias: "browser"
+			packageAlias: "browser",
+            extensions: ['', '.js', '.vue']
 		}
 	}
 

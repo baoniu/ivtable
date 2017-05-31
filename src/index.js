@@ -20,4 +20,4 @@ export {
     install
 };
 
-export default ivtable;
+//export default IVTable;
