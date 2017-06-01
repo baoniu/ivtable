@@ -39,10 +39,10 @@
     <tbody :class="[ tbody_css || '' ]">
     <template v-if="!table_data || table_data.length < 1 || table_hint_text">
       <template v-if="table_hint_text">
-        <tr :class="[ tbody_tr_css || '' ]"><td :colspan="[table_columns.length || '']">{{table_hint_text}}</td></tr>
+        <tr :class="[ tbody_tr_css || '' ]"><td :colspan="countVisibleFields">{{table_hint_text}}</td></tr>
       </template>
       <template v-if="!table_hint_text">
-        <tr :class="[ tbody_tr_css || '' ]"><td :colspan="[ table_columns.length || '' ]">暂无数据</td></tr>
+        <tr :class="[ tbody_tr_css || '' ]"><td :colspan="countVisibleFields">暂无数据</td></tr>
       </template>
     </template>
     <template v-if="!(!table_data || table_data.length < 1 || table_hint_text)">
