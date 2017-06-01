@@ -125,18 +125,6 @@
           </template>
         </tr>
 
-        <!--<template v-if="useDetailRow">-->
-          <!--<tr @click="onDetailRowClick(item, $event)"-->
-              <!--:class="[detail_row_class]"-->
-          <!--&gt;-->
-            <!--<transition :name="detail_row_transition">-->
-              <!--<td :colspan="countVisibleFields">-->
-                <!--<component :is="detail_row_component" :row-data="item" :row-index="item_index"></component>-->
-              <!--</td>-->
-            <!--</transition>-->
-          <!--</tr>-->
-        <!--</template>-->
-
         <template v-if="useDetailRow">
           <tr v-if="isVisibleDetailRow(item[track_by])"
               @click="onDetailRowClick(item, $event)"
@@ -149,7 +137,6 @@
             </transition>
           </tr>
         </template>
-
 
       </template>
     </template>
