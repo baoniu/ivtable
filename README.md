@@ -1,18 +1,18 @@
-# ivtable
+# IVTable
 
-基于VUE的表格渲染和分页插件
+基于VUE的表格渲染和分页组件, 这种编译vue组件库的方式很不错
 
 # 编译方式
 
 npm install
 npm run build
 
-生成文件到dist/ivtable.js
+生成库文件到dist/ivtable.js
 
 
 
 
-# ivtable
+# 表格
 
 ### 调用方式
     <script src="dist/ivtable.js"></script>
@@ -73,7 +73,7 @@ npm run build
 
 
 
-# ivpaaination
+# 分页组件
 
 ### 调用方式
          <IVPagination
