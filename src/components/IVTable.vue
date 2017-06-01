@@ -2,7 +2,7 @@
   <table :class="[table_css || '']">
     <thead>
     <tr :class="[thead_tr_css || '']">
-      <template v-for="field in table_columns">
+      <template v-for="(field, index) in table_columns">
         <template v-if="isSpecialField(field.name)">
           <th v-if="extractName(field.name) == '__checkbox'" :style="[ field.style || '' ]" :class="[field.title_css || '']">
             <input type="checkbox" @change="toggleAllCheckboxes(field, $event)">
@@ -24,10 +24,14 @@
           </th>
         </template>
         <template v-if="!isSpecialField(field.name)">
-          <th v-bind:id="'vue_table_' + field.name" :style="[ field.style || '' ]" :class="[ field.title_css || '' ]">
-          <th :style="[ field.style || '' ]" :class="[ field.title_css || '' ]">
-            {{ getTitle(field) }}
-          </th>
+          <template v-if="!hasHtml(field)">
+            <th :id="('_' + index + '-' + field.name)" :style="[ field.style || '' ]" :class="[ field.title_css || '' ]">
+              {{ getTitle(field) }}
+            </th>
+          </template>
+          <template v-if="hasHtml(field)">
+            <th v-html="getTitle(field)" :id="('_' + index + '-' + field.name)" :style="[ field.style || '' ]" :class="[ field.title_css || '' ]"></th>
+          </template>
         </template>
       </template>
     </tr>
@@ -42,11 +46,12 @@
       </template>
     </template>
     <template v-if="!(!table_data || table_data.length < 1 || table_hint_text)">
-      <template v-for="(item, itemNumber) in table_data">
+      <template v-for="(item, item_index) in table_data">
         <tr :class="[ tbody_tr_css || '' ]">
           <template v-for="field in table_columns">
+            <!--判断是否为特殊组件-->
             <template v-if="isSpecialField(field.name)">
-              <td v-if="extractName(field.name) == '__checkbox'" :class="[{'vuetable-checkboxes': true}, field.data_css]">
+              <td v-if="extractName(field.name) == '__checkbox'" :class="[{'ivtable-checkboxes': true}, field.data_css]">
                 <input type="checkbox"
                        @change="toggleCheckbox(item, field.name, $event)"
                        v-if="hasCallback(field)"
@@ -87,7 +92,7 @@
                 </template>
               </td>
               <td v-if="field.name == '__id'" :class="[ field.data_css || '']">
-                {{ itemNumber + 1}}
+                {{ item_index + 1}}
               </td>
               <td v-if="extractName(field.name) === '__component'" :class="field.data_css">
                 <component :is="extractArgs(field.name)" :row-data="item"></component>
@@ -95,13 +100,21 @@
             </template>
             <template v-if="!isSpecialField(field.name)">
               <template v-if="!hasHtml(field)">
-                <td v-if="hasCallback(field)" :class="[ field.data_css || '']" @click="onCellClicked(item, field, $event)">
+                <td v-if="hasCallback(field)"
+                    :class="[ field.data_css || '']"
+                    @click="onCellClicked(item, field, $event)"
+                    @dblclick="onCellDoubleClicked(item, field, $event)"
+                >
                   {{ callCallback(field, item) }}
                 </td>
-                <td v-else :class="[ field.data_css || '']" @click="onCellClicked(item, field, $event)">
+                <td v-else
+                    :class="[ field.data_css || '']"
+                    @click="onCellClicked(item, field, $event)"
+                >
                   {{ getObjectValue(item, field.name, "") }}
                 </td>
               </template>
+              <!--渲染纯html-->
               <template v-if="hasHtml(field)">
                 <td v-if="hasCallback(field)" :class="[ field.data_css || '']" @click="onCellClicked(item, field, $event)" v-html="callCallback(field, item)">
                 </td>
@@ -111,6 +124,33 @@
             </template>
           </template>
         </tr>
+
+        <!--<template v-if="useDetailRow">-->
+          <!--<tr @click="onDetailRowClick(item, $event)"-->
+              <!--:class="[detail_row_class]"-->
+          <!--&gt;-->
+            <!--<transition :name="detail_row_transition">-->
+              <!--<td :colspan="countVisibleFields">-->
+                <!--<component :is="detail_row_component" :row-data="item" :row-index="item_index"></component>-->
+              <!--</td>-->
+            <!--</transition>-->
+          <!--</tr>-->
+        <!--</template>-->
+
+        <template v-if="useDetailRow">
+          <tr v-if="isVisibleDetailRow(item[track_by])"
+              @click="onDetailRowClick(item, $event)"
+              :class="[detail_row_class]"
+          >
+            <transition :name="detail_row_transition">
+              <td :colspan="countVisibleFields">
+                <component :is="detail_row_component" :row-data="item" :row-index="item_index"></component>
+              </td>
+            </transition>
+          </tr>
+        </template>
+
+
       </template>
     </template>
     </tbody>
@@ -136,7 +176,9 @@
                 default: function(){return {selected: []}}
             },
             item_actions: {
-                default: [],
+                default: function() {
+                    return [];
+                }
             },
             table_css: {
                 default: '',
@@ -153,16 +195,45 @@
             tbody_tr_css: {
                 default: ''
             },
+            detail_row_class: {
+                default: ''
+            },
+            css: {
+                type: Object,
+                default () {
+                    return {
+                        table_css: '',
+                        thead_css: '',
+                        thead_tr_css: '',
+                        tbody_css: '',
+                        tbody_tr_css: '',
+                        detail_row_class: '',
+                    }
+                }
+            },
             sortOrder: {
                 type: Array,
                 default: function() {
                     return [];
                 }
             },
+            track_by: {
+                type: String,
+                default: ""
+            },
+            detail_row_component: {
+                type: String,
+                default: ""
+            },
+            detail_row_transition: {
+                type: String,
+                default: ''
+            },
         },
         data: function() {
             return {
-                eventPrefix: 'base-vue-table:',
+                eventPrefix: 'ivtable:',
+                visible_detail_rows: [],
             }
         },
         created () {
@@ -172,9 +243,42 @@
 
         },
         computed: {
-
+            countVisibleFields () {
+                return this.table_columns.length
+            },
+            useDetailRow () {
+                if (this.table_data && this.table_data[0] && this.detail_row_component !== '' && typeof this.table_data[0][this.track_by] === 'undefined') {
+                    this.warn('You need to define unique row identifier in order for detail-row feature to work. Use `track-by` prop to define one!')
+                    return false
+                }
+                return this.detail_row_component !== ''
+            },
         },
         methods: {
+
+            isVisibleDetailRow (rowId) {
+                return this.visible_detail_rows.indexOf( rowId ) >= 0
+            },
+            showDetailRow (rowId) {
+                if (!this.isVisibleDetailRow(rowId)) {
+                    this.visible_detail_rows.push(rowId)
+                }
+            },
+            hideDetailRow (rowId) {
+                if (this.isVisibleDetailRow(rowId)) {
+                    this.visible_detail_rows.splice( this.visible_detail_rows.indexOf(rowId), 1 )
+                }
+            },
+            toggleDetailRow (rowId) {
+                if (this.isVisibleDetailRow(rowId)) {
+                    this.hideDetailRow(rowId)
+                } else {
+                    this.showDetailRow(rowId)
+                }
+            },
+            onDetailRowClick (dataItem, event) {
+                this.$emit(this.eventPrefix + 'detail-row-clicked', dataItem, event)
+            },
             isSpecialField: function(fieldName) {
                 // return fieldName.startsWith('__')
                 return fieldName.slice(0, 2) === '__'
@@ -306,6 +410,9 @@
             },
             onCellClicked: function(data_item, field, event) {
                 this.$emit(this.eventPrefix + 'cell-clicked', data_item, field, event)
+            },
+            onCellDoubleClicked (dataItem, field, event) {
+                this.$emit(this.eventPrefix + 'cell-dblclicked', dataItem, field, event)
             },
             getObjectValue: function(object, path, defaultValue) {
                 defaultValue = (typeof defaultValue == 'undefined') ? null : defaultValue;
