@@ -1,11 +1,17 @@
 <template>
 
     <div>
-    <template v-for="(item, index) in data.options">
-        <label v-bind:class="label_class" v-bind:style="label_style">
-            <input v-bind:checked="true" v-if="index == 0" @click="data.selected = $event.target.value" type="radio" :class="input_class" :style="input_style" v-bind:name="name"  v-bind:value="item.value" v-model="data.selected" >
-            <input v-else @click="data.selected = $event.target.value" type="radio" :class="input_class" :style="input_style" v-bind:name="name"  v-bind:value="item.value" v-model="data.selected" >
-            {{item.text}}
+        <template v-for="(item, index) in data.options">
+            <label v-bind:class="label_class" v-bind:style="label_style">
+                <input type="radio"
+                       @click="data.selected = $event.target.value"
+                       :class="input_class"
+                       :style="input_style"
+                       :name="name"
+                       :value="item.value"
+                       v-model="data.selected"
+                >
+                {{item.text}}
             </label>
         </template>
     </div>
@@ -38,7 +44,7 @@
                 }
             },
             name: {
-                default: 'MiRadioComponent' + Math.ceil(Math.random() * 10000000)
+                default: 'RadioComponent' + Math.ceil(Math.random() * 10000000)
             }
         }
     }
