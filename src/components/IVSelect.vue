@@ -1,6 +1,6 @@
 <template>
 
-    <select v-on:change="data.selected = $event.target.value" v-bind:class="css" v-bind:style="style" v-bind:name="name" v-model="data.selected">
+    <select v-on:change="data.selected = $event.target.value" v-bind:class="css" v-bind:style="_style" v-bind:name="name" v-model="data.selected">
     <template v-for="option in data.options">
         <option v-bind:value="option.value">{{ option.text }}</option>
         </template>
@@ -16,7 +16,7 @@
             css: {
                 default: ''
             },
-            style: {
+            _style: {
                 default: ''
             },
             name: {
