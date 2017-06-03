@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div :class="css">
         <template v-for="(item, index) in data.options">
             <label v-bind:class="label_class" v-bind:style="label_style">
                 <input type="radio"
