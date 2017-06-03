@@ -48,14 +48,9 @@
                 }
             },
             name: {
-                default: (this.rn)
+                default: 'RadioComponent' + Math.ceil(Math.random() * 10000000)
             }
         },
-        methods: {
-            rn: function () {
-                return 'RadioComponent' + Math.ceil(Math.random() * 10000000);
-            }
-        }
     }
     /**
      * input radio组件
