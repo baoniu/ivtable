@@ -292,3 +292,14 @@
             }
         }
     });
+    
+    
+# 扩展自己的组件
+
+1、在src/components里写好自己的组件
+
+2、修改src/index.js文件，把自己的组件加进去
+
+3、npm run build重新编译
+
+4、引用dist/ivtable.js文件，调用即可
