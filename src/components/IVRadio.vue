@@ -20,7 +20,6 @@
 
 
 <script>
-    let rand_num = 'RadioComponent' + Math.ceil(Math.random() * 10000000);
     export default {
         props: {
             css: {
@@ -49,7 +48,7 @@
                 }
             },
             name: {
-                default: rand_num
+                default: 'RadioComponent' + Math.ceil(Math.random() * 10000000)
             }
         }
     }
