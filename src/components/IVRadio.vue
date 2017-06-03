@@ -22,6 +22,9 @@
 <script>
     export default {
         props: {
+            css: {
+                default: 'inline-block'
+            },
             input_class: {
                 default: ''
             },

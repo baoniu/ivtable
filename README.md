@@ -4,8 +4,8 @@
 
 # 编译方式
 
-npm install
-npm run build
+    npm install
+    npm run build
 
 生成库文件到dist/ivtable.js
 
@@ -123,42 +123,6 @@ npm run build
             data_css:  'hidden-phone hidden-xs hidden-sm',
         },
         {
-            name: 'category',
-            title: '分类',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'name',
-            title: '任务名称',
-            callback: 'format_task_name',
-            html: true,
-        },
-        {
-            name: 'body',
-            title: '主体名称',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'budget',
-            title: '预算云豆',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'actually_paid',
-            title: '实付云豆',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'rebate',
-            title: '返还云豆',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
             name: 'start_time',
             title: '开始时间',
             title_css:  'hidden-phone hidden-xs hidden-sm',
@@ -172,7 +136,7 @@ npm run build
         },
         {
             name: 'status',
-            title: '任务状态',
+            title: '状态',
             html: true,
             callback: 'format_status'
         },
@@ -206,32 +170,6 @@ npm run build
             ],
             table_columns: table_columns,
             table_hint_text: '',
-            action_data: {
-                key_word: '',
-                date_range: {
-                    from: '',
-                    to: ''
-                },
-                select_channel: {
-                    selected: 1,
-                    options: [
-                        { text: '全部渠道', value: '1'},
-                        { text: '电商', value: '2'},
-                        { text: 'APP', value: '3'},
-                        { text: '腾讯类', value: '4'},
-                        { text: '自定义任务', value: '5'},
-                    ]
-                },
-                select_status: {
-                    selected: 1,
-                    options: [
-                        { text: '审核中', value: '1'},
-                        { text: '已开始', value: '2'},
-                        { text: '已完成', value: '3'},
-                        { text: '刷钻', value: '4'},
-                    ]
-                }
-            },
             table_data: {
                 data_total: 100,
                 page_total: 10,
@@ -244,13 +182,7 @@ npm run build
                 rows: [
                     {
                         id:'1',
-                        channel: '电商',
-                        category: '淘宝',
-                        name: '2017款美裙',
-                        body: 'XX旗舰店',
-                        budget: 200,
-                        actually_paid: 200,
-                        rebate: 0,
+                        channel: 'WEB',
                         start_time: '2017-1-1',
                         end_time: '2017-2-2',
                         status: '进行中'
@@ -258,12 +190,6 @@ npm run build
                     {
                         id:'2',
                         channel: 'APP',
-                        category: '天猫',
-                        name: '美团外卖',
-                        body: '美团',
-                        budget: 200,
-                        actually_paid: 200,
-                        rebate: 0,
                         start_time: '2017-1-1',
                         end_time: '2017-2-2',
                         status: '审核失败'
@@ -276,104 +202,15 @@ npm run build
             's-table': IVTable,
             's-pagination': IVPagination,
         },
-        watch: {
-            /**
-             * 监听值发生变化，触发函数执行
-             * */
-        },
-        computed:{
-            /**
-             * 计算属性
-             **/
-            computed_select_category: function () {
-                var channel_id = this.action_data.select_channel.selected;
-                /**
-                 * 全部
-                 **/
-                if(channel_id == 1) {
-                    return {
-                        selected: 1,
-                        options: [
-                            { text: '全部分类', value: '1'},
-                            { text: 'APP下载', value: '2'},
-                            { text: 'APP评论', value: '3'},
-                        ]
-    
-                    }
-                }
-                /**
-                 * 电商
-                 **/
-                if(channel_id == 2) {
-                    return {
-                        selected: 1,
-                        options: [
-                            { text: '全部分类', value: '1'},
-                            { text: '宝贝', value: '1'},
-                        ]
-    
-                    }
-                }
-    
-                /**
-                 * app
-                 **/
-                if(channel_id == 3) {
-                    return {
-                        selected: 1,
-                        options: [
-                            { text: '全部分类', value: '1'},
-                            { text: 'APP', value: '1'},
-                        ]
-    
-                    }
-                }
-    
-                /**
-                 * 其它...
-                 **/
-    
-                return {
-                    selected: '',
-                    options: [
-                        { text: '未定义', value: ''},
-                    ]
-    
-                }
-    
-            }
-        },
+        
         mounted: function () {
     //            this.$nextTick(function(){
-    //                (function(obj){
-    //
-    //                })(this);
+    //              
     //            });
         },
         methods:{
             loadServerData: function (post_data) {
-    
                 console.log(post_data)
-            },
-            submit: function () {
-                var post_data = {
-                    channel_id: this.action_data.select_channel.selected,
-                    category_id: this.computed_select_category.selected,
-                    status_id: this.action_data.select_status.selected,
-                    key_word: this.action_data.key_word,
-                    date_from: this.action_data.date_range.from,
-                    date_to: this.action_data.date_range.to,
-                };
-    
-                /**
-                 * 检查数据并ajax提交到服务器
-                 * todo
-                 */
-    
-    
-                alert('你点击了筛选提交按钮，数据看console.log')
-    
-                this.loadServerData(post_data);
             },
             show_close_btn: function (row, btn) {
                 /**
@@ -383,10 +220,6 @@ npm run build
                     return false;
                 }
                 return true;
-            },
-            format_task_name: function (task_name,row) {
-                var str = '<a href="task_detail.html?"'+row.id+'>'+task_name+'</a>';
-                return str;
             },
             format_status: function (status) {
                 if (status === '进行中') {
@@ -411,3 +244,14 @@ npm run build
             }
         }
     });
+    
+    
+# 扩展自己的组件
+
+1、在src/components里写好自己的组件
+
+2、修改src/index.js文件，把自己的组件加进去
+
+3、npm run build重新编译
+
+4、引用dist/ivtable.js文件，调用即可
