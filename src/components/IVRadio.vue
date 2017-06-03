@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div :class="css">
     <template v-for="(item, index) in data.options">
         <label v-bind:class="label_class" v-bind:style="label_style">
             <input v-bind:checked="true" v-if="index == 0" @click="data.selected = $event.target.value" type="radio" :class="input_class" :style="input_style" v-bind:name="name"  v-bind:value="item.value" v-model="data.selected" >
@@ -16,6 +16,9 @@
 <script>
     export default {
         props: {
+            css: {
+                default: 'inline-block'
+            },
             input_class: {
                 default: ''
             },
