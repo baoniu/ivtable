@@ -4,8 +4,8 @@
 
 # 编译方式
 
-npm install
-npm run build
+    npm install
+    npm run build
 
 生成库文件到dist/ivtable.js
 
@@ -206,32 +206,6 @@ npm run build
             ],
             table_columns: table_columns,
             table_hint_text: '',
-            action_data: {
-                key_word: '',
-                date_range: {
-                    from: '',
-                    to: ''
-                },
-                select_channel: {
-                    selected: 1,
-                    options: [
-                        { text: '全部渠道', value: '1'},
-                        { text: '电商', value: '2'},
-                        { text: 'APP', value: '3'},
-                        { text: '腾讯类', value: '4'},
-                        { text: '自定义任务', value: '5'},
-                    ]
-                },
-                select_status: {
-                    selected: 1,
-                    options: [
-                        { text: '审核中', value: '1'},
-                        { text: '已开始', value: '2'},
-                        { text: '已完成', value: '3'},
-                        { text: '刷钻', value: '4'},
-                    ]
-                }
-            },
             table_data: {
                 data_total: 100,
                 page_total: 10,
@@ -276,104 +250,15 @@ npm run build
             's-table': IVTable,
             's-pagination': IVPagination,
         },
-        watch: {
-            /**
-             * 监听值发生变化，触发函数执行
-             * */
-        },
-        computed:{
-            /**
-             * 计算属性
-             **/
-            computed_select_category: function () {
-                var channel_id = this.action_data.select_channel.selected;
-                /**
-                 * 全部
-                 **/
-                if(channel_id == 1) {
-                    return {
-                        selected: 1,
-                        options: [
-                            { text: '全部分类', value: '1'},
-                            { text: 'APP下载', value: '2'},
-                            { text: 'APP评论', value: '3'},
-                        ]
-    
-                    }
-                }
-                /**
-                 * 电商
-                 **/
-                if(channel_id == 2) {
-                    return {
-                        selected: 1,
-                        options: [
-                            { text: '全部分类', value: '1'},
-                            { text: '宝贝', value: '1'},
-                        ]
-    
-                    }
-                }
-    
-                /**
-                 * app
-                 **/
-                if(channel_id == 3) {
-                    return {
-                        selected: 1,
-                        options: [
-                            { text: '全部分类', value: '1'},
-                            { text: 'APP', value: '1'},
-                        ]
-    
-                    }
-                }
-    
-                /**
-                 * 其它...
-                 **/
-    
-                return {
-                    selected: '',
-                    options: [
-                        { text: '未定义', value: ''},
-                    ]
-    
-                }
-    
-            }
-        },
+        
         mounted: function () {
     //            this.$nextTick(function(){
-    //                (function(obj){
-    //
-    //                })(this);
+    //              
     //            });
         },
         methods:{
             loadServerData: function (post_data) {
-    
                 console.log(post_data)
-            },
-            submit: function () {
-                var post_data = {
-                    channel_id: this.action_data.select_channel.selected,
-                    category_id: this.computed_select_category.selected,
-                    status_id: this.action_data.select_status.selected,
-                    key_word: this.action_data.key_word,
-                    date_from: this.action_data.date_range.from,
-                    date_to: this.action_data.date_range.to,
-                };
-    
-                /**
-                 * 检查数据并ajax提交到服务器
-                 * todo
-                 */
-    
-    
-                alert('你点击了筛选提交按钮，数据看console.log')
-    
-                this.loadServerData(post_data);
             },
             show_close_btn: function (row, btn) {
                 /**
@@ -383,10 +268,6 @@ npm run build
                     return false;
                 }
                 return true;
-            },
-            format_task_name: function (task_name,row) {
-                var str = '<a href="task_detail.html?"'+row.id+'>'+task_name+'</a>';
-                return str;
             },
             format_status: function (status) {
                 if (status === '进行中') {
