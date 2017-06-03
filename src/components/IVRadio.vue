@@ -48,7 +48,12 @@
                 }
             },
             name: {
-                default: 'RadioComponent' + Math.ceil(Math.random() * 10000000)
+                default: (this.rn)
+            }
+        },
+        methods: {
+            rn: function () {
+                return 'RadioComponent' + Math.ceil(Math.random() * 10000000);
             }
         }
     }
