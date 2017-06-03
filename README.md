@@ -123,42 +123,6 @@
             data_css:  'hidden-phone hidden-xs hidden-sm',
         },
         {
-            name: 'category',
-            title: '分类',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'name',
-            title: '任务名称',
-            callback: 'format_task_name',
-            html: true,
-        },
-        {
-            name: 'body',
-            title: '主体名称',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'budget',
-            title: '预算云豆',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'actually_paid',
-            title: '实付云豆',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
-            name: 'rebate',
-            title: '返还云豆',
-            title_css:  'hidden-phone hidden-xs hidden-sm',
-            data_css:  'hidden-phone hidden-xs hidden-sm',
-        },
-        {
             name: 'start_time',
             title: '开始时间',
             title_css:  'hidden-phone hidden-xs hidden-sm',
@@ -172,7 +136,7 @@
         },
         {
             name: 'status',
-            title: '任务状态',
+            title: '状态',
             html: true,
             callback: 'format_status'
         },
@@ -218,13 +182,7 @@
                 rows: [
                     {
                         id:'1',
-                        channel: '电商',
-                        category: '淘宝',
-                        name: '2017款美裙',
-                        body: 'XX旗舰店',
-                        budget: 200,
-                        actually_paid: 200,
-                        rebate: 0,
+                        channel: 'WEB',
                         start_time: '2017-1-1',
                         end_time: '2017-2-2',
                         status: '进行中'
@@ -232,12 +190,6 @@
                     {
                         id:'2',
                         channel: 'APP',
-                        category: '天猫',
-                        name: '美团外卖',
-                        body: '美团',
-                        budget: 200,
-                        actually_paid: 200,
-                        rebate: 0,
                         start_time: '2017-1-1',
                         end_time: '2017-2-2',
                         status: '审核失败'
