@@ -35,7 +35,8 @@
                 default: 'radio-inline'
             },
             label_style: {
-                default: 'padding-left: 0px;padding-right: 10px'
+//                default: 'padding-left: 0px;padding-right: 10px'
+                default: ''
             },
             data: {
                 required: true,
