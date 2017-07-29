@@ -4,7 +4,7 @@
     <div class="input-group" style="max-width: 500px;padding-top: 5px;">
         <span class="input-group-addon">从</span>
         <input v-bind:name="name_from" class="form-control date data-filter" placeholder="开始日期" data-date-format="YYYY-MM-DD" type="text">
-        <span class="input-group-addon middle-addon">到</span>
+        <span class="input-group-addon middle-addon" style="width: 100%;">到</span>
         <input v-bind:name="name_to" class="form-control date data-filter" placeholder="结束日期"  data-date-format="YYYY-MM-DD" type="text">
         </div>
     </div>
