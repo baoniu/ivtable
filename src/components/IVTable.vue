@@ -69,24 +69,24 @@
                     <template v-if="hasItem(action.tooltip)">
                       <label v-if="callActionItem(action, item)" :class="[ action.css || '']" @click="callAction(action, item, $event)" data-toggle="tooltip" data-placement="top" :title="action.tooltip">
                         <i :class="[ action.icon || '']"></i> {{ action.label }}
-                      </label>&nbsp;
+                      </label>
                     </template>
                     <template v-if="!hasItem(action.tooltip)">
                       <label v-if="callActionItem(action, item)" :class="[ action.css || '']" @click="callAction(action, item, $event)">
                         <i :class="[ action.icon || '']"></i> {{ action.label }}
-                      </label>&nbsp;
+                      </label>
                     </template>
                   </template>
                   <template v-if="!isDisplay(action)">
                     <template v-if="hasItem(action.tooltip)">
                       <label :class="[ action.css || '']" @click="callAction(action, item, $event)" data-toggle="tooltip" data-placement="top" :title="action.tooltip">
                         <i :class="[ action.icon || '']"></i> {{ action.label }}
-                      </label>&nbsp;
+                      </label>
                     </template>
                     <template v-if="!hasItem(action.tooltip)">
                       <label :class="[ action.css || '']" @click="callAction(action, item, $event)">
                         <i :class="[ action.icon || '']"></i> {{ action.label }}
-                      </label>&nbsp;
+                      </label>
                     </template>
                   </template>
                 </template>

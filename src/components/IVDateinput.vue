@@ -53,8 +53,8 @@
                     _self.$set(_self.date_range, 'to', $(this).val())
                 });
 
-                let nowTemp = new Date();
-                let now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+//                let nowTemp = new Date();
+//                let now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
                 let checkin = form_obj.datepicker({
                     format: "yyyy-mm-dd",
