@@ -3,9 +3,9 @@
     <div class="inline-block">
     <div class="input-group" style="max-width: 500px;padding-top: 5px;">
         <span class="input-group-addon">从</span>
-        <input v-bind:name="name_from" class="form-control date data-filter" placeholder="开始日期" data-date-format="YYYY-MM-DD" type="text">
-        <span class="input-group-addon middle-addon" style="width: 100%;">到</span>
-        <input v-bind:name="name_to" class="form-control date data-filter" placeholder="结束日期"  data-date-format="YYYY-MM-DD" type="text">
+        <input v-bind:name="name_from" class="form-control datetime datetime-filter" placeholder="开始日期" data-date-format="YYYY-MM-DD hh:ii" type="text">
+        <span class="input-group-addon middle-addon ivtable-plug-datetime-addon">到</span>
+        <input v-bind:name="name_to" class="form-control datetime datetime-filter" placeholder="结束日期"  data-date-format="YYYY-MM-DD hh:ii" type="text">
         </div>
     </div>
 
@@ -29,12 +29,12 @@
         watch: {
             'date_range.from':  function (val, old) {
                 if(val === '') {
-                    $('[name='+this.name_from+']').datepicker('setDate', null)
+                    $('[name='+this.name_from+']').datetimepicker('setDate', null)
                 }
             },
             'date_range.to':  function (val, old) {
                 if(val === '') {
-                    $('[name='+this.name_to+']').datepicker('setDate', null)
+                    $('[name='+this.name_to+']').datetimepicker('setDate', null)
                 }
             },
         },
@@ -53,19 +53,19 @@
                     _self.$set(_self.date_range, 'to', $(this).val())
                 });
 
-                let nowTemp = new Date();
-                let now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+//                let nowTemp = new Date();
+//                let now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
-                let checkin = form_obj.datepicker({
-                    format: "yyyy-mm-dd",
+                let checkin = form_obj.datetimepicker({
+                    format: "yyyy-mm-dd hh:ii",
                     language: "zh-CN",
                     autoclose: true,
                 }).on('changeDate', function(ev) {
                     checkin.hide();
                     $('[name='+_self.name_to+']')[0].focus();
                 }).data('datepicker');
-                let checkout = to_obj.datepicker({
-                    format: "yyyy-mm-dd",
+                let checkout = to_obj.datetimepicker({
+                    format: "yyyy-mm-dd hh:ii",
                     language: "zh-CN",
                     autoclose: true,
                 }).on('changeDate', function(ev) {
