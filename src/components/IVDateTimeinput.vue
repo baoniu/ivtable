@@ -57,19 +57,21 @@
 //                let now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
                 let checkin = form_obj.datetimepicker({
+                    startDate: new Date(),
                     format: "yyyy-mm-dd hh:ii",
                     language: "zh-CN",
                     autoclose: true,
                 }).on('changeDate', function(ev) {
-                    checkin.hide();
+//                    checkin.hide();
                     $('[name='+_self.name_to+']')[0].focus();
                 }).data('datepicker');
                 let checkout = to_obj.datetimepicker({
+                    startDate: new Date(),
                     format: "yyyy-mm-dd hh:ii",
                     language: "zh-CN",
                     autoclose: true,
                 }).on('changeDate', function(ev) {
-                    checkout.hide();
+//                    checkout.hide();
                 }).data('datepicker');
 
             });
