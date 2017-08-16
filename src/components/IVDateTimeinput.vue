@@ -3,9 +3,9 @@
     <div class="inline-block">
     <div class="input-group" style="max-width: 500px;padding-top: 5px;">
         <span class="input-group-addon">从</span>
-        <input v-bind:name="name_from" class="form-control datetime datetime-filter" placeholder="开始日期" data-date-format="YYYY-MM-DD hh:ii" type="text">
+        <input v-bind:name="name_from" class="form-control datetime datetime-filter" placeholder="开始时间" data-date-format="YYYY-MM-DD hh:ii" type="text">
         <span class="input-group-addon middle-addon ivtable-plug-datetime-addon">到</span>
-        <input v-bind:name="name_to" class="form-control datetime datetime-filter" placeholder="结束日期"  data-date-format="YYYY-MM-DD hh:ii" type="text">
+        <input v-bind:name="name_to" class="form-control datetime datetime-filter" placeholder="结束时间"  data-date-format="YYYY-MM-DD hh:ii" type="text">
         </div>
     </div>
 
