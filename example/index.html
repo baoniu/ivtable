@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sample</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div id="box" class="container">
+    <s-table
+            :item_actions="table_item_actions"
+            :table_data="table_data.rows"
+            :table_columns="table_columns"
+            :table_hint_text="table_hint_text"
+            table_css="table table-striped table-advance table-hover"
+    ></s-table>
+
+    <!--<s-pagination-->
+    <!--:page_data="table_data"-->
+    <!--:pagination_button_length="4"-->
+    <!--&gt;</s-pagination>-->
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.15/vue.min.js"></script>
+<script src="../dist/ivtable.js"></script>
+<script>
+    //渲染的表格头
+    var table_columns = [
+        {
+            name: 'id',
+            title: 'ID',
+        },
+        {
+            name: 'channel',
+            title: '渠道',
+            title_css: 'hidden-phone hidden-xs hidden-sm',
+            data_css: 'hidden-phone hidden-xs hidden-sm',
+        },
+        {
+            name: 'start_time',
+            title: '开始时间',
+            title_css: 'hidden-phone hidden-xs hidden-sm',
+            data_css: 'hidden-phone hidden-xs hidden-sm',
+        },
+        {
+            name: 'end_time',
+            title: '结束时间',
+            title_css: 'hidden-phone hidden-xs hidden-sm',
+            data_css: 'hidden-phone hidden-xs hidden-sm',
+        },
+        {
+            name: 'status',
+            title: '状态',
+            html: true,
+            callback: 'format_status'
+        },
+        {
+            name: '__actions',
+            title: ''
+        }
+    ];
+    new Vue({
+        el: '#box',
+        data: {
+            table_item_actions: [ //操作控件
+                {
+                    name: 'delete-item',
+                    label: '删除',
+                    icon: 'icon icon-remove',
+                    css: 'btn btn-xs btn-danger tooltips',
+                    displayed: 'show_close_btn',
+                    callback: 'delete_item',
+                    tooltip: '删除任务'
+                },
+                {
+                    name: 'edit-item',
+                    label: '编辑',
+                    icon: 'icon icon-pencil',
+                    css: 'btn btn-xs btn-primary tooltips',
+                    displayed: '',
+                    callback: 'edit_item',
+                    tooltip: '编辑任务',
+                },
+            ],
+            table_columns: table_columns,
+            table_hint_text: '',
+            table_data: {
+                data_total: 100,
+                page_total: 10,
+                page_size: 10,
+                page_cur: 3,
+                data_from: 21,
+                data_end: 30,
+//                rows: default_table_data
+                rows: [
+                    {
+                        id: '1',
+                        channel: 'WEB',
+                        start_time: '2017-1-1',
+                        end_time: '2017-2-2',
+                        status: '进行中'
+                    },
+                    {
+                        id: '2',
+                        channel: 'APP',
+                        start_time: '2017-1-1',
+                        end_time: '2017-2-2',
+                        status: '审核失败'
+                    }
+                ]
+            }
+        },
+        components: {
+            's-table': IVTable,
+            's-pagination': IVPagination,
+        },
+
+        mounted: function () {
+//            this.$nextTick(function(){
+//
+//            });
+        },
+        methods: {
+            loadServerData: function (post_data) {
+                console.log(post_data)
+            },
+            show_close_btn: function (row, btn) {
+                /**
+                 * 控制action显示
+                 * */
+                if (row.id == 1) {
+                    return false;
+                }
+                return true;
+            },
+            format_status: function (status) {
+                if (status === '进行中') {
+                    return '<span class="label label-success label-xs">' + status + '</span>';
+                }
+                if (status === '审核失败') {
+                    return '<span class="label label-danger label-xs">' + status + '</span>';
+                }
+                return status;
+            },
+            debug: function () {
+                console.log(this.$data)
+            },
+            edit_item: function (btn, row) {
+                console.log('你点了我：', btn, row)
+                //row 就是一行的数据
+                alert('你点击了edit_item函数，详细数据请看console.log')
+            },
+            delete_item: function (btn, row) {
+                console.log('你点了我：', btn, row)
+                alert('你点击了delte_item函数，详细数据请看console.log')
+            }
+        }
+    });
+</script>
+</body>
+</html>

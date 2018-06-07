@@ -6,7 +6,7 @@
         </div>
         <div class="col-lg-6">
             <div class="dataTables_paginate paging_bootstrap pagination">
-                <ul>
+                <ul class="pagination">
                     <li class="first" v-bind:class="{ disabled: page_data.page_cur <= 1 }"><a href="javascript:void(0)" v-on:click="pagination_first">首页</a></li>
                     <li class="prev" v-bind:class="{ disabled: page_data.page_cur <= 1 }"><a href="javascript:void(0)" v-on:click="pagination_previous">← 上一页</a></li>
                     <span>
