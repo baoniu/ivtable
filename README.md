@@ -3,7 +3,9 @@
 PHP后端开发工程师写的 基于VUE的轻量化表格渲染和分页组件
 
 # 示例
-    http://hookover.github.io/ivtable/example
+
+http://hookover.github.io/ivtable/example
+
 # 编译方式
 
     npm install
